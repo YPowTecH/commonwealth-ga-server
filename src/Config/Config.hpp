@@ -46,5 +46,13 @@ public:
 	// DLL is still a Windows binary under Wine, so _WIN32 cannot distinguish
 	// host runtime.
 	static bool GetNativeWindowsRuntime();
+
+	// True for /challenge-launched instances. Challenge matches reuse normal
+	// PvP maps + game classes, so the DLL can't distinguish them from ranked
+	// matches by map/mode alone — the control server stamps -challenge=1 on
+	// the challenge spawn path only. Gates challenge-only behavior such as the
+	// Tetra respawn beacon (TgBeaconFactory::SpawnObject). Switch: -challenge=1.
+	// Default: false.
+	static bool GetIsChallengeMatch();
 };
 

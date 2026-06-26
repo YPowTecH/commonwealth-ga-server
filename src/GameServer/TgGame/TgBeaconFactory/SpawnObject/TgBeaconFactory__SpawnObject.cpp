@@ -4,6 +4,7 @@
 #include "src/GameServer/Globals.hpp"
 #include "src/GameServer/Storage/TeamsData/TeamsData.hpp"
 #include "src/GameServer/Utils/ClassPreloader/ClassPreloader.hpp"
+#include "src/Config/Config.hpp"
 #include "src/Utils/Logger/Logger.hpp"
 
 // Stripped native (TgBeaconFactory__SpawnObject_notimplemented @ 0x10a8c260).
@@ -184,8 +185,17 @@ void __fastcall TgBeaconFactory__SpawnObject::Call(ATgBeaconFactory* factory, vo
 		return nullptr;
 	}
 
-	beacon->r_nDeployableId   = 36;
-	beacon->m_nPickupDeviceId = 1918;
+	// Challenge matches use the Tetra respawn beacon (deployable 196) instead
+	// of the basic Respawn_Beacon (36). Both share class_res_id 221, asm 860
+	// and device form 3775 — same spawned class/mesh — so only the data tag
+	// and carry device change: Tetra is 2000 HP (vs 3000) and its carry device
+	// (4967 vs 1918) attaches effect group 17709, granting the holder
+	// +GroundSpeed / +Power Pool Recharge (the basic carry group 5716 is empty,
+	// i.e. no carrier buff). Gated by -challenge=1 because challenge matches are
+	// otherwise indistinguishable from ranked PvP at this layer.
+	const bool isChallenge = Config::GetIsChallengeMatch();
+	beacon->r_nDeployableId   = isChallenge ? 196  : 36;
+	beacon->m_nPickupDeviceId = isChallenge ? 4967 : 1918;
 	WireDeployableOwnership(beacon, factory, tf);
 
 	// Pre-deployed (no Deploy animation). Marks m_bIsDeployed=1 (via
@@ -205,9 +215,11 @@ void __fastcall TgBeaconFactory__SpawnObject::Call(ATgBeaconFactory* factory, vo
 	}
 
 	Logger::Log("beacon",
-		"  exit spawned 0x%p tf=%d at (%.0f,%.0f,%.0f) registered with manager 0x%p r_BeaconInfo=0x%p\n",
+		"  exit spawned 0x%p tf=%d at (%.0f,%.0f,%.0f) deployableId=%d pickupDevice=%d challenge=%d "
+		"registered with manager 0x%p r_BeaconInfo=0x%p\n",
 		beacon, (int)factory->s_nTaskForce,
-		beacon->Location.X, beacon->Location.Y, beacon->Location.Z, mgr,
+		beacon->Location.X, beacon->Location.Y, beacon->Location.Z,
+		beacon->r_nDeployableId, beacon->m_nPickupDeviceId, (int)isChallenge, mgr,
 		mgr->r_BeaconInfo);
 	return nullptr;
 }

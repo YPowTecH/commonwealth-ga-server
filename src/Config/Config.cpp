@@ -272,4 +272,11 @@ bool Config::GetNativeWindowsRuntime() {
 	return val == L"1" || val == L"true";
 }
 
+bool Config::GetIsChallengeMatch() {
+	ParsedOptions options = CommandLineParser::ParseCommandLine();
+	std::wstring val = options.switches[L"challenge"];
+	if (val.empty()) return false;
+	return val == L"1" || val == L"true";
+}
+
 

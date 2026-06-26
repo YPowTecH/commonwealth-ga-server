@@ -16,12 +16,18 @@ public:
     // difficulty_value_id: pass the queue's value to override the DLL's
     // map-name-based default; 0 = no override (DLL falls back to its
     // hardcoded heuristic).
+    // is_challenge: true only for /challenge-launched instances. Passes
+    // -challenge=1 to the DLL (Config::GetIsChallengeMatch) so challenge-only
+    // behavior (e.g. Tetra respawn beacons) can gate on it. Challenge matches
+    // share map+game_class with ranked PvP, so the DLL can't tell them apart
+    // without this flag.
     static pid_t Spawn(const ControlServerConfig& cfg,
                        const std::string& map_name,
                        const std::string& game_mode,
                        uint16_t udp_port,
                        int64_t instance_id,
-                       uint32_t difficulty_value_id = 0);
+                       uint32_t difficulty_value_id = 0,
+                       bool is_challenge = false);
 
     // Terminate the process group for an already-spawned game instance.
     // Sends SIGTERM immediately, then SIGKILL after grace_seconds if the
