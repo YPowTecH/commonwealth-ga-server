@@ -83,7 +83,40 @@ static const OpeningTable kRoboticsOpening = {{
     }, // PT
     {}, {}, {}
 }};
-// static const OpeningTable kAssaultOpening  = {{ {...}, {}, {}, {}, {} }};
+static const OpeningTable kAssaultOpening = {{
+    {
+        { 5801,  1,  SVID_MELEE,     Q_EPIC, Mods::Letters("ddd", "ddd", false)  },  // Impact Hammer
+        { 5788,  2,  SVID_RANGED,    Q_EPIC, Mods::Letters("ddd", "ddd", true)   },  // Rhino SMG (OC)
+        { 2914,  3,  SVID_SPECIALTY, Q_EPIC, Mods::Letters("ddd", "ddd", true)   },  // Inferno-X Cannon (OC)
+        { 7031,  5,  SVID_JETPACK,   Q_EPIC, Mods::Letters("ppp", "ppp", false)  },  // Assault Crescent Jetpack
+        { 2498,  7,  SVID_OFFHAND1,  Q_EPIC, Mods::Letters("ddd", "ddd", true)   },  // Concussion Grenade (OC)
+        { 3699,  8,  SVID_OFFHAND2,  Q_EPIC, Mods::Letters("ccc", "ccc", false)  },  // Power Stim
+        { 2013,  9,  SVID_OFFHAND3,  Q_EPIC, Mods::Letters("ccc", "ccc", false)  },  // Range Shield
+        { 5775, 10,  SVID_MORALE,    Q_EPIC, Mods::Letters("mmm", "ddd", false)  },  // Super Smash Boost
+    }, // DPS
+    {
+        { 5801,  1,  SVID_MELEE,     Q_EPIC, Mods::Letters("ddd", "ddd", false)  },  // Impact Hammer
+        { 5788,  2,  SVID_RANGED,    Q_EPIC, Mods::Letters("ddd", "ddd", true)   },  // Rhino SMG (OC)
+        { 2914,  3,  SVID_SPECIALTY, Q_EPIC, Mods::Letters("ddd", "ddd", true)   },  // Inferno-X Cannon (OC)
+        { 7031,  5,  SVID_JETPACK,   Q_EPIC, Mods::Letters("ppp", "ppp", false)  },  // Assault Crescent Jetpack
+        { 2498,  7,  SVID_OFFHAND1,  Q_EPIC, Mods::Letters("ddd", "ddd", true)   },  // Concussion Grenade (OC)
+        { 2004,  8,  SVID_OFFHAND2,  Q_EPIC, Mods::Letters("ccc", "ccc", false)  },  // AoE Shield
+        { 2013,  9,  SVID_OFFHAND3,  Q_EPIC, Mods::Letters("ccc", "ccc", false)  },  // Range Shield
+        { 2838, 10,  SVID_MORALE,    Q_EPIC, Mods::Letters("mmm", "", false)     },  // Protection Boost
+    }, // Tank
+    {},
+    {
+        { 5801,  1,  SVID_MELEE,     Q_EPIC, Mods::Letters("ddd", "ddd", false)  },  // Impact Hammer
+        { 5788,  2,  SVID_RANGED,    Q_EPIC, Mods::Letters("ddd", "ddd", true)   },  // Rhino SMG (OC)
+        { 1991,  3,  SVID_SPECIALTY, Q_EPIC, Mods::Letters("ddd", "ddd", true)   },  // Headhunter Launcher (OC)
+        { 7031,  5,  SVID_JETPACK,   Q_EPIC, Mods::Letters("ppp", "ppp", false)  },  // Assault Crescent Jetpack
+        { 2498,  7,  SVID_OFFHAND1,  Q_EPIC, Mods::Letters("ddd", "ddd", true)   },  // Concussion Grenade (OC)
+        { 3699,  8,  SVID_OFFHAND2,  Q_EPIC, Mods::Letters("ccc", "ccc", false)  },  // Power Stim
+        { 2013,  9,  SVID_OFFHAND3,  Q_EPIC, Mods::Letters("ccc", "ccc", false)  },  // Range Shield
+        { 5775, 10,  SVID_MORALE,    Q_EPIC, Mods::Letters("mmm", "ddd", false)  },  // Super Smash Boost
+    }, // Headhunter
+    {}
+}};
 // static const OpeningTable kReconOpening    = {{ {...}, {}, {}, {}, {} }};
 
 static const std::vector<GearSlot> kEmpty = {};
@@ -93,7 +126,7 @@ const std::vector<GearSlot>& GetOpeningLoadout(uint32_t profile_id, int loadout_
     switch (profile_id) {
         case PROFILE_MEDIC:    return kMedicOpening[loadout_slot - 1];
         case PROFILE_ROBOTICS: return kRoboticsOpening[loadout_slot - 1];
-        // case PROFILE_ASSAULT:  return kAssaultOpening[loadout_slot - 1];
+        case PROFILE_ASSAULT:  return kAssaultOpening[loadout_slot - 1];
         // case PROFILE_RECON:    return kReconOpening[loadout_slot - 1];
         default:               return kEmpty;
     }
