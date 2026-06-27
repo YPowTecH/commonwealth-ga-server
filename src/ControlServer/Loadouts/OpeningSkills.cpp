@@ -39,11 +39,33 @@ static const SkillTable kMedicSkills = {{
     }, // Pain Gun
 }};
 
-// TODO author the other classes (each 5 profiles wide); class groups are:
-//   Robotics 162/163, Assault 158/159, Recon 160/161 — all plus common 155.
-// static const SkillTable kRoboticsSkills = {{ {...}, {}, {}, {}, {} }};
-// static const SkillTable kAssaultSkills  = {{ {...}, {}, {}, {}, {} }};
-// static const SkillTable kReconSkills    = {{ {...}, {}, {}, {}, {} }};
+static const SkillTable kRoboticsSkills = {{ 
+    {
+        { 155, 533 }, { 155, 676 }, { 155, 526 }, { 155, 550 }, { 155, 524 },
+        { 162, 785 }, { 162, 786 }, { 162, 613 }, { 162, 845 }, { 162, 612 }, { 162, 907 }, { 162, 851 }, { 162, 714 }
+    }, // Turrets and Boost
+    {
+        { 155, 533 }, { 155, 676 }, { 155, 526 }, { 155, 545 }, { 155, 524 },
+        { 162, 785 }, { 162, 786 }, { 162, 613 }, { 162, 845 }, { 162, 612 }, { 162, 907 }, { 162, 851 }, { 162, 714 }
+    }, // Turrets and Health
+    {},
+    {},
+    {}
+}};
+static const SkillTable kAssaultSkills = {{ 
+    {},
+    {},
+    {},
+    {},
+    {}
+}};
+static const SkillTable kReconSkills = {{ 
+    {},
+    {},
+    {},
+    {},
+    {}
+}};
 
 static const std::vector<SkillNode> kEmpty = {};
 
@@ -51,9 +73,9 @@ const std::vector<SkillNode>& GetOpeningSkills(uint32_t profile_id, int loadout_
     if (loadout_slot < 1 || loadout_slot > 5) return kEmpty;
     switch (profile_id) {
         case PROFILE_MEDIC:    return kMedicSkills[loadout_slot - 1];
-        // case PROFILE_ROBOTICS: return kRoboticsSkills[loadout_slot - 1];
-        // case PROFILE_ASSAULT:  return kAssaultSkills[loadout_slot - 1];
-        // case PROFILE_RECON:    return kReconSkills[loadout_slot - 1];
+        case PROFILE_ROBOTICS: return kRoboticsSkills[loadout_slot - 1];
+        case PROFILE_ASSAULT:  return kAssaultSkills[loadout_slot - 1];
+        case PROFILE_RECON:    return kReconSkills[loadout_slot - 1];
         default:               return kEmpty;
     }
 }

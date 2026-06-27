@@ -46,8 +46,7 @@ static const OpeningTable kMedicOpening = {{
         { 2246,  9,  SVID_OFFHAND3,  Q_EPIC, Mods::Letters("hhh", "hhh", false) },  // Regeneration
         { 2773, 10,  SVID_MORALE,    Q_EPIC, Mods::Letters("mmm", "hhh", false) },  // Healing Boost
     }, // Nanite
-    {},  // Profile 3 — TODO author
-    {},  // Profile 4 — TODO author
+    {}, {},
     {
         { 5800,  1,  SVID_MELEE,     Q_EPIC, Mods::Letters("ddd", "ddd", false) },  // Life Stealer
         { 4676,  2,  SVID_RANGED,    Q_EPIC, Mods::Letters("ppp", "ppp", false) },  // Pain Gun
@@ -61,7 +60,29 @@ static const OpeningTable kMedicOpening = {{
 }};
 
 // TODO author the other classes (each 5 profiles wide):
-// static const OpeningTable kRoboticsOpening = {{ {...}, {}, {}, {}, {} }};
+static const OpeningTable kRoboticsOpening = {{
+    {
+        { 5802,  1,  SVID_MELEE,     Q_EPIC, Mods::Letters("ddd", "ddd", false)    },  // Mace and Shield
+        { 5798,  2,  SVID_RANGED,    Q_EPIC, Mods::Letters("ddd", "ddd", true)     },  // Harken SMG (OC)
+        { 2918,  3,  SVID_SPECIALTY, Q_EPIC, Mods::Letters("hhh", "hhh", true)     },  // Focused Repair Arm (OC)
+        { 7034,  5,  SVID_JETPACK,   Q_EPIC, Mods::Letters("ppp", "ppp", false)    },  // Robotics Crescent Jetpack
+        { 2051,  7,  SVID_OFFHAND1,  Q_EPIC, Mods::Letters("nnn", "vnvnvn", true)  },  // Force Wall (OC)
+        { 2066,  8,  SVID_OFFHAND2,  Q_EPIC, Mods::Letters("xxx", "hhh", false)    },  // Medical Station
+        { 2300,  9,  SVID_OFFHAND3,  Q_EPIC, Mods::Letters("ddd", "ddd", false)    },  // Personal Turret
+        { 2886, 10,  SVID_MORALE,    Q_EPIC, Mods::Letters("mmm", "vnvnvn", false) },  // Dome Shield Boost
+    }, // PT
+    {
+        { 5802,  1,  SVID_MELEE,     Q_EPIC, Mods::Letters("ddd", "ddd", false)    },  // Mace and Shield
+        { 5798,  2,  SVID_RANGED,    Q_EPIC, Mods::Letters("ddd", "ddd", true)     },  // Harken SMG (OC)
+        { 2918,  3,  SVID_SPECIALTY, Q_EPIC, Mods::Letters("hhh", "hhh", true)     },  // Focused Repair Arm (OC)
+        { 7034,  5,  SVID_JETPACK,   Q_EPIC, Mods::Letters("ppp", "ppp", false)    },  // Robotics Crescent Jetpack
+        { 2051,  7,  SVID_OFFHAND1,  Q_EPIC, Mods::Letters("nnn", "vnvnvn", true)  },  // Force Wall (OC)
+        { 2066,  8,  SVID_OFFHAND2,  Q_EPIC, Mods::Letters("xxx", "hhh", false)    },  // Medical Station
+        { 2300,  9,  SVID_OFFHAND3,  Q_EPIC, Mods::Letters("ddd", "ddd", false)    },  // Personal Turret
+        { 2886, 10,  SVID_MORALE,    Q_EPIC, Mods::Letters("mmm", "vnvnvn", false) },  // Dome Shield Boost
+    }, // PT
+    {}, {}, {}
+}};
 // static const OpeningTable kAssaultOpening  = {{ {...}, {}, {}, {}, {} }};
 // static const OpeningTable kReconOpening    = {{ {...}, {}, {}, {}, {} }};
 
@@ -71,7 +92,7 @@ const std::vector<GearSlot>& GetOpeningLoadout(uint32_t profile_id, int loadout_
     if (loadout_slot < 1 || loadout_slot > 5) return kEmpty;
     switch (profile_id) {
         case PROFILE_MEDIC:    return kMedicOpening[loadout_slot - 1];
-        // case PROFILE_ROBOTICS: return kRoboticsOpening[loadout_slot - 1];
+        case PROFILE_ROBOTICS: return kRoboticsOpening[loadout_slot - 1];
         // case PROFILE_ASSAULT:  return kAssaultOpening[loadout_slot - 1];
         // case PROFILE_RECON:    return kReconOpening[loadout_slot - 1];
         default:               return kEmpty;
